@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    body {
+      display: grid;
+      color: black;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .container {
+      margin: auto;
+      max-width: 20rem;
+      padding: 1.5rem 1.5rem;
+      background-color: #e5e5f7;
+      opacity: 0.8;
+      background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+      background-size: 10px 10px;
+    }
+    .code-wrapper > h4 {
+      margin: 0;
+    }
+    .access-codes {
+      margin: 0;
+      margin-top: 0.5rem;
+      list-style-type: none;
+      padding-left: 0.3rem;
+    }
+    .copyright {
+      font-size: small;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to ChatApp</h2>
+    <main>
+      <p class="welcome">
+        Dear {{ firstname }},<br>
+        Thank you for signing up on ChatApp.
+      </p>
+      <p>
+        For your account security, we have generated for you a number
+        of account recovery code.
+      </p>
+      <p>
+        In the event you forget your account password, you will need 
+        to supply the requested access codes to recover your account.<br>
+      </p>
+      <div class="code-wrapper">
+        <h4>Access codes</h4>
+        <ul class="access-codes">
+          {{#each codes as |code index|}}
+          <li>r{{index}}<span>{{code}}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+    </main>
+    <hr>
+    <div class="copyright">
+      All rights reserved &copy; ChatApp.
+    </div>
+  </div>
+</body>
+</html>
