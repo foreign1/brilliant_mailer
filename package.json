@@ -1,10 +1,10 @@
 {
   "name": "jobless.niddle",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple but highly extensible mailing microservice.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "tsc && nodemon \"./build/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
