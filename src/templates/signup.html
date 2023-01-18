@@ -54,8 +54,8 @@
       <div class="code-wrapper">
         <h4>Access codes</h4>
         <ul class="access-codes">
-          {{#each codes as |code index|}}
-          <li>r{{index}}<span>{{code}}</span></li>
+          {{#each codes}}
+          <li>{{@key}}: <span>{{this}}</span></li>
           {{/each}}
         </ul>
       </div>

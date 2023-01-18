@@ -4,7 +4,7 @@
   "description": "A simple but highly extensible mailing microservice.",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && cp -R src/templates build nodemon \"./build/index.js\"",
+    "start": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
