@@ -4,7 +4,6 @@ export type Env = EnvType<typeof schema>;
 
 export const schema = {
   PORT: Number,
-  NODE_ENV: String,
   EMAIL_ID: String,
   EMAIL_PASSWORD: String,
   SMTP_SERVICE: String,

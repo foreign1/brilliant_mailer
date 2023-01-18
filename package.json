@@ -1,7 +1,7 @@
 {
   "name": "jobless.niddle",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple but highly extensible mailing microservice.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",

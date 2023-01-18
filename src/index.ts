@@ -42,7 +42,7 @@ app.post("/api/v1/welcome", (req: Request, res: Response) => {
     const template = handlebars.compile(source);
     const replacements = {
         firstname,
-        codes: Object.values(gac)
+        codes: gac
     };
     const htmlToSend = template(replacements);
     const mailOptions = {
