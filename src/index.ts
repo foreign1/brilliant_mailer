@@ -28,22 +28,32 @@ const actions: actions = {
   notice: "./templates/signup.html",
   recover: "./templates/recover.html",
   welcome: "./templates/signup.html",
+  newmail: "./templates/newmail.html",
 }
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send({message: "Welcome to the mailer api. Kindly see the docs for usage instructions."});
 });
 
-app.post("/api/v1/welcome", (req: Request, res: Response) => {
+app.post("/api/v1/sendmail", (req: Request, res: Response) => {
   try {
-    const { actionType, userEmail, subject, firstname, gac } = req.body;
+    const { actionType, userEmail, subject, firstname, gac, body } = req.body;
     const filePath = path.join(__dirname, actions[actionType as keyof actions]);
     const source = fs.readFileSync(filePath, 'utf-8').toString();
     const template = handlebars.compile(source);
-    const replacements = {
-        firstname,
-        codes: gac
-    };
+    //do replacements here
+    let replacements;
+    if (actionType === "newmail") {
+      replacements = {
+        subject,
+        body
+      }
+    } else {
+      replacements = {
+          firstname,
+          codes: gac
+      };
+    }
     const htmlToSend = template(replacements);
     const mailOptions = {
       from: EMAIL_ID,
@@ -54,6 +64,9 @@ app.post("/api/v1/welcome", (req: Request, res: Response) => {
 
     transporter.sendMail(mailOptions, function(error, info){      
       if (error) {
+        if (actionType === "newmail") {
+          return res.status(400).send({message: `Failed to send mail!\nPlease contact admin!`})!
+        }
         return res.status(400).send({message: `Recovery failed!\nYou must have provided an 
         invalid email at signup.\nPlease contact admin!`})
       } else {
@@ -61,7 +74,9 @@ app.post("/api/v1/welcome", (req: Request, res: Response) => {
         actionType === "welcome" ?
           message = "Account creation successful.\nPlease check your email for more details." :
           actionType === "notice" ?
-          message = "Notice sent successfully" :
+          message = "Notice sent successfully" : 
+          actionType === "newmail" ?
+          message = "Mail sent successfully!" :
           message = "Account recovery successful!\nCheck your email for further instrutions!";
         return res.status(200).send({message});
       }
